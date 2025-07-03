@@ -1,24 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .mines {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   height: 100vh;
+  background-color: #005bb5;
+}
+
+.game-contant {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  background-color: #002f66;
+  padding: 2px;
+  border-radius: 8px;
+}
+
+.game-bet-coefficient {
+  padding: 3px 30px;
+  background-color: #001f4d;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.game-current-coefficient {
+  padding: 3px 15px;
+  background-color: #ffc107;
+  border-radius: 8px;
+  color: #000;
 }
 
 .game-grid {
   display: grid;
   grid-template-columns: repeat(5, 70px);
   grid-template-rows: repeat(5, 70px);
-  gap: 12px;
+  gap: 8px;
   margin-top: 10px;
 }
 
 .tile {
   width: 70px;
   height: 70px;
-  background-color: aqua;
-  border: 1px solid #000;
+  background-color: #002f66;
+  border: 5px solid #001f4d;
   border-radius: 8px;
   cursor: pointer;
   box-sizing: border-box;
@@ -27,8 +65,33 @@
 .controls {
   margin: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.bet-usd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+}
+
+.bet-info {
+  font-size: 12px;
+}
+
+.bet-price {
+  font-size: 18px;
+}
+
+.bet-control {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
 }
 
 #start-button {
@@ -53,11 +116,11 @@ button#start-button.disabled {
   justify-content: center;
 }
 .tile.revealed.mine {
-  background: red;
+  background: #8b0000;
 }
 
 .tile.revealed.diamond {
-  background: lightgreen;
+  background: #2e8b57;
 }
 
 .popup {
@@ -85,4 +148,31 @@ button#start-button.disabled {
 
 .popup.hidden {
   display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  overflow: hidden;
+}
+
+.container:nth-child(1) img {
+  width: 120%;
+  transform: translateX(-30%);
+}
+
+.container img.rotate {
+  width: 120%;
+  transform: translateX(30%) rotate(290deg);
+}
+
+.game-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
