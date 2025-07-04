@@ -41,7 +41,6 @@ minesSelect.addEventListener("change", (e) => {
   coefficientDisplay.textContent = `Next: ${coefficient.toFixed(2)}x`;
 });
 
-// интерфейс для Game
 export function getSelectedMines() {
   return selectedMines;
 }
@@ -64,7 +63,6 @@ export function resetMineSelection() {
 let currentGame: Game;
 
 window.addEventListener("DOMContentLoaded", () => {
-  // ⬇️ создаём грид при загрузке страницы с начальными параметрами
   currentGame = new Game(5, 5, selectedMines);
 
   const startButton = document.getElementById(
@@ -87,6 +85,36 @@ window.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".minus")?.addEventListener("click", () => {
     if (!gameStarted) decreaseBet();
   });
+
+  const usdBtn = document.getElementById("usd");
+  const customDropdown = document.getElementById("custom-dropdown");
+
+  // Показать / скрыть dropdown
+  usdBtn?.addEventListener("click", (e) => {
+    e.stopPropagation(); // чтобы не закрывало само себя
+    customDropdown?.classList.toggle("show");
+  });
+
+  // Обработка выбора суммы
+  customDropdown?.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains("dropdown-option")) {
+      const value = parseFloat(target.dataset.value || "0.1");
+      betAmount = value;
+      updateBetDisplay();
+      customDropdown.classList.remove("show");
+    }
+  });
+
+  // Закрытие при клике вне меню
+  document.addEventListener("click", (e) => {
+    const isClickInside =
+      customDropdown?.contains(e.target as Node) ||
+      usdBtn?.contains(e.target as Node);
+    if (!isClickInside) {
+      customDropdown?.classList.remove("show");
+    }
+  });
 });
 export function getNextCoefficient(
   mines: number,
@@ -94,20 +122,15 @@ export function getNextCoefficient(
 ): number {
   const totalTiles = 25;
   const remainingTiles = totalTiles - revealedSafeTiles;
-  const remainingMines = mines;
+  const remainingSafeTiles = remainingTiles - mines;
 
-  // Вероятность попасть на мину
-  const probabilityOfMine = remainingMines / remainingTiles;
+  if (remainingTiles <= 0 || remainingSafeTiles <= 0) return 0;
 
-  // Вероятность НЕ попасть на мину
-  const probabilityOfSurvival = 1 - probabilityOfMine;
+  const nextCoeff = remainingTiles / remainingSafeTiles;
 
-  // Коэффициент — обратная величина вероятности: чем ниже шанс выжить, тем выше награда
-  const nextCoeff = 1 / probabilityOfSurvival;
-
-  // округляем до 2 знаков после запятой
   return parseFloat(nextCoeff.toFixed(2));
 }
+
 let betAmount = 0.3;
 
 export function getBetAmount() {
@@ -123,12 +146,54 @@ function updateBetDisplay() {
   }
 }
 
+// function increaseBet() {
+//   betAmount = Math.min(10, betAmount + 0.1);
+//   updateBetDisplay();
+// }
+
+// function decreaseBet() {
+//   betAmount = Math.max(0.1, betAmount - 0.1);
+//   updateBetDisplay();
+// }
+
 function increaseBet() {
-  betAmount = Math.min(10, betAmount + 0.1); // максимум $10
+  betAmount = Math.min(100, +(betAmount + 0.1).toFixed(2));
   updateBetDisplay();
 }
 
 function decreaseBet() {
-  betAmount = Math.max(0.1, betAmount - 0.1); // минимум $0.1
+  betAmount = Math.max(0.1, +(betAmount - 0.1).toFixed(2));
   updateBetDisplay();
 }
+
+const plusBtn = document.getElementById("plus");
+const minusBtn = document.getElementById("minus");
+const usdBtn = document.getElementById("usd");
+const dropdown = document.getElementById("bet-dropdown") as HTMLSelectElement;
+
+// Обработчик +
+plusBtn?.addEventListener("click", () => {
+  if (!gameStarted) {
+    increaseBet();
+  }
+});
+
+// Обработчик -
+minusBtn?.addEventListener("click", () => {
+  if (!gameStarted) {
+    decreaseBet();
+  }
+});
+
+// Обработчик раскрытия выпадающего меню
+usdBtn?.addEventListener("click", () => {
+  dropdown.classList.toggle("hidden");
+});
+
+// Обработчик выбора суммы
+dropdown?.addEventListener("change", (e) => {
+  if (!gameStarted) {
+    betAmount = parseFloat((e.target as HTMLSelectElement).value);
+    updateBetDisplay();
+  }
+});

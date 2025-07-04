@@ -56,6 +56,8 @@
   width: 70px;
   height: 70px;
   background-color: #002f66;
+  box-shadow: 3px 3px 6px #020b1a80, inset -1px -1px #00000052,
+    inset 1px 1px #fff1cd33;
   border: 5px solid #001f4d;
   border-radius: 8px;
   cursor: pointer;
@@ -68,7 +70,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 150%;
+  background-color: #002f66;
+  border: 3px solid #001f4d;
+  border-radius: 16px;
+  padding: 3px 10px;
 }
 
 .bet-usd {
@@ -98,25 +104,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 30px;
+  padding: 10px;
   width: 150px;
-  height: 70px;
+  height: 50px;
   font-size: 18px;
   background-color: #61a503;
-  color: white;
   border: 2px solid #2d7500;
-  border-radius: 12px;
+  border-radius: 20px;
   cursor: pointer;
-  /* gap: 4px; */
+  box-shadow: 3px 3px 6px #020b1a80, inset -1px -1px #00000052,
+    inset 1px 1px #fff1cd33;
+  border: 2px solid rgba(0, 0, 0, 0.9);
 }
 
+#start-button .button-label {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  color: white;
+}
 .win-text {
   font-size: 12px;
   color: #fff;
-}
-
-.hidden {
-  display: none;
 }
 
 .tile.revealed {
@@ -129,12 +136,17 @@
 }
 
 .tile.revealed.diamond {
-  background: #2e8b57;
+  background: #ffc107;
+}
+
+.tile svg.icon {
+  width: 50px;
+  height: 50px;
 }
 
 .popup {
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 16px 24px;
@@ -185,6 +197,40 @@
   justify-content: center;
 }
 
+.bet-controls-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  width: 50%;
+  background-color: #005bb5;
+  box-shadow: 3px 3px 6px #020b1a80, inset -1px -1px #00000052,
+    inset 1px 1px #fff1cd33;
+  border: 2px solid rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.bet-controler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.full-bet-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 5px;
+  width: 100%;
+  box-shadow: 3px 3px 6px #020b1a80, inset -1px -1px #00000052,
+    inset 1px 1px #fff1cd33;
+  border: 2px solid rgba(0, 0, 0, 0.9);
+  fill: #fff;
+}
 .animate-flash {
   animation: flash 0.3s ease;
 }
@@ -220,4 +266,59 @@
     transform: scale(1);
     color: #fff;
   }
+}
+.hidden {
+  display: none;
+}
+
+.bet-dropdown-wrapper {
+  position: relative;
+}
+
+.custom-dropdown {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  background-color: #002f66;
+  box-shadow: 3px 3px 6px #020b1a80, inset -1px -1px #00000052,
+    inset 1px 1px #fff1cd33;
+  border: 5px solid #001f4d;
+  padding: 10px;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  border-radius: 6px;
+  width: 150px;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-option {
+  color: #fff;
+  text-align: end;
+  cursor: pointer;
+}
+
+.custom-dropdown.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.icon {
+  opacity: 0;
+  animation: fadeInScale 0.3s ease-out forwards;
 }

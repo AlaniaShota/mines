@@ -162,21 +162,42 @@ export class Game {
     }
   }
 
+  // private updateWinAmountDisplay() {
+  //   const coeff = getNextCoefficient(
+  //     this.mineCount,
+  //     this.revealedSafeTiles - 1
+  //   );
+  //   const currentCoeff = coeff <= 1 ? 1.0 : coeff;
+  //   const win = (this.betAmount * this.totalMultiplier).toFixed(2);
+  //   const winSpan = document.getElementById("win-inside-button")!;
+  //   winSpan.textContent = `${win}$`;
+  //   winSpan.classList.remove("animate-win");
+  //   void winSpan.offsetWidth;
+  //   winSpan.classList.add("animate-win");
+  //   const betInfo = document.querySelector(".bet-info") as HTMLParagraphElement;
+  //   if (betInfo) {
+  //     betInfo.textContent = `${win}$`;
+  //     betInfo.classList.remove("hidden");
+  //     betInfo.classList.remove("animate-win");
+  //     void betInfo.offsetWidth;
+  //     betInfo.classList.add("animate-win");
+  //   }
+  // }
   private updateWinAmountDisplay() {
-    const coeff = getNextCoefficient(
-      this.mineCount,
-      this.revealedSafeTiles - 1
-    );
-    const currentCoeff = coeff <= 1 ? 1.0 : coeff;
     const win = (this.betAmount * this.totalMultiplier).toFixed(2);
+    const multiplier = this.totalMultiplier.toFixed(2);
+
     const winSpan = document.getElementById("win-inside-button")!;
-    winSpan.textContent = `${win}$`;
+    winSpan.textContent = `${win}$ (x${multiplier})`;
+
+    // Анимация
     winSpan.classList.remove("animate-win");
     void winSpan.offsetWidth;
     winSpan.classList.add("animate-win");
+
     const betInfo = document.querySelector(".bet-info") as HTMLParagraphElement;
     if (betInfo) {
-      betInfo.textContent = `${win}$`;
+      betInfo.textContent = `${win}$ (x${multiplier})`;
       betInfo.classList.remove("hidden");
       betInfo.classList.remove("animate-win");
       void betInfo.offsetWidth;

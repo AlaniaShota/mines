@@ -23,14 +23,40 @@
         <div class="game-container">
           <div class="game-grid" id="game-grid"></div>
           <div class="controls">
-            <div class="bet-usd">
-              <p class="usd">Bet USD</p>
-              <p class="bet-price">0.30</p>
-            </div>
-            <div class="bet-controler">
-              <div class="minus">-</div>
-              <div class="full-bet-control">=</div>
-              <div class="plus">+</div>
+            <div class="bet-controls-container">
+              <div class="bet-usd">
+                <p class="usd">Bet USD</p>
+                <p class="bet-price">0.30</p>
+              </div>
+              <div class="bet-controler">
+                <div class="full-bet-control">
+                  <img id="minus" src="/public/minus.svg" alt="minus" />
+                </div>
+                <div class="full-bet-control bet-dropdown-wrapper">
+                  <img id="usd" src="/public/database-dollar.svg" alt="usd" />
+                  <div id="custom-dropdown" class="custom-dropdown">
+                    <div class="dropdown-option" data-value="0.10">0.10</div>
+                    <div class="dropdown-option" data-value="0.20">0.20</div>
+                    <div class="dropdown-option" data-value="0.30">0.30</div>
+                    <div class="dropdown-option" data-value="0.40">0.40</div>
+                    <div class="dropdown-option" data-value="0.50">0.50</div>
+                    <div class="dropdown-option" data-value="0.60">0.60</div>
+                    <div class="dropdown-option" data-value="0.70">0.70</div>
+                    <div class="dropdown-option" data-value="0.80">0.80</div>
+                    <div class="dropdown-option" data-value="1.20">1.20</div>
+                    <div class="dropdown-option" data-value="2">2</div>
+                    <div class="dropdown-option" data-value="4">4</div>
+                    <div class="dropdown-option" data-value="10">10</div>
+                    <div class="dropdown-option" data-value="20">20</div>
+                    <div class="dropdown-option" data-value="50">50</div>
+                    <div class="dropdown-option" data-value="100">100</div>
+                  </div>
+                </div>
+
+                <div class="full-bet-control">
+                  <img id="plus" src="/public/plus.svg" alt="plus" />
+                </div>
+              </div>
             </div>
             <div class="start-button-wrapper">
               <button id="start-button">

@@ -1,3 +1,6 @@
+import diamondIcon from "../assets/diamond.svg?raw";
+import bombIcon from "../assets/bomb.svg?raw";
+
 export class Tile {
   public hasMine: boolean = false;
   public revealed: boolean = false;
@@ -19,15 +22,42 @@ export class Tile {
     }
   }
 
+  // reveal() {
+  //   this.revealed = true;
+  //   this.element.classList.add("revealed");
+
+  //   this.element.innerHTML = this.hasMine ? bombIcon : diamondIcon;
+
+  //   this.element.querySelector("svg")?.classList.add("icon");
+
+  //   if (this.hasMine) {
+  //     this.element.classList.add("mine");
+  //   } else {
+  //     this.element.classList.add("diamond");
+  //   }
+  //   const svg = this.element.querySelector("svg");
+  //   if (svg) {
+  //     svg.classList.add("icon");
+  //     svg.style.fill = this.hasMine ? " #000" : "#fff";
+  //   }
+  // }
   reveal() {
     this.revealed = true;
     this.element.classList.add("revealed");
 
+    const iconHTML = this.hasMine ? bombIcon : diamondIcon;
+    this.element.innerHTML = iconHTML;
+
+    const svg = this.element.querySelector("svg");
+
+    if (svg) {
+      svg.classList.add("icon");
+      svg.style.fill = this.hasMine ? "#000" : "#fff";
+    }
+
     if (this.hasMine) {
-      this.element.textContent = "Mine";
       this.element.classList.add("mine");
     } else {
-      this.element.textContent = "Diamond";
       this.element.classList.add("diamond");
     }
   }
