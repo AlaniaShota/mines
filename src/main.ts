@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const customDropdown = document.getElementById("custom-dropdown");
 
   usdBtn?.addEventListener("click", (e) => {
-    e.stopPropagation(); // чтобы не закрывало само себя
+    e.stopPropagation();
     customDropdown?.classList.toggle("show");
   });
 
@@ -141,16 +141,6 @@ function updateBetDisplay() {
     setTimeout(() => priceEl.classList.remove("animate-flash"), 300);
   }
 }
-
-// function increaseBet() {
-//   betAmount = Math.min(10, betAmount + 0.1);
-//   updateBetDisplay();
-// }
-
-// function decreaseBet() {
-//   betAmount = Math.max(0.1, betAmount - 0.1);
-//   updateBetDisplay();
-// }
 
 function increaseBet() {
   betAmount = Math.min(100, +(betAmount + 0.1).toFixed(2));

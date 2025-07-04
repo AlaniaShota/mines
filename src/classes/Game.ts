@@ -39,8 +39,8 @@ export class Game {
   }
 
   public setMineCount(count: number) {
-    this.mineCount = count;
-    this.grid.setMineCount(count);
+    this.mineCount = Math.max(3, count);
+    this.grid.setMineCount(this.mineCount);
   }
 
   public isActive() {
@@ -69,13 +69,17 @@ export class Game {
   public cashOut() {
     this.isGameActive = false;
     this.grid.revealAllTiles();
-    this.updateWinAmountDisplay();
-    this.startButton.querySelector(".button-label")!.textContent = "Bet";
+
     const winAmount = (this.betAmount * this.totalMultiplier).toFixed(2);
     this.showMessage(`You cashed out ${winAmount}$ !`);
-    const winSpan = document.getElementById("win-inside-button")!;
 
+    this.startButton.querySelector(".button-label")!.textContent = "Bet";
+
+    const winSpan = document.getElementById("win-inside-button")!;
     winSpan.classList.add("hidden");
+
+    this.revealedSafeTiles = 0;
+
     setTimeout(() => {
       this.grid.resetGrid();
       this.startButton.querySelector(".button-label")!.textContent = "Bet";
@@ -84,9 +88,11 @@ export class Game {
       resetMineSelection();
       unlockMineSelection();
       setGameStarted(false);
+
       const winSpan = document.getElementById("win-inside-button")!;
       winSpan.textContent = "";
       winSpan.classList.add("hidden");
+
       const betInfo = document.querySelector(
         ".bet-info"
       ) as HTMLParagraphElement;
@@ -96,6 +102,7 @@ export class Game {
       }
 
       this.clearMessage();
+      this.totalMultiplier = 1;
     }, 3000);
   }
 
@@ -163,27 +170,6 @@ export class Game {
     }
   }
 
-  // private updateWinAmountDisplay() {
-  //   const coeff = getNextCoefficient(
-  //     this.mineCount,
-  //     this.revealedSafeTiles - 1
-  //   );
-  //   const currentCoeff = coeff <= 1 ? 1.0 : coeff;
-  //   const win = (this.betAmount * this.totalMultiplier).toFixed(2);
-  //   const winSpan = document.getElementById("win-inside-button")!;
-  //   winSpan.textContent = `${win}$`;
-  //   winSpan.classList.remove("animate-win");
-  //   void winSpan.offsetWidth;
-  //   winSpan.classList.add("animate-win");
-  //   const betInfo = document.querySelector(".bet-info") as HTMLParagraphElement;
-  //   if (betInfo) {
-  //     betInfo.textContent = `${win}$`;
-  //     betInfo.classList.remove("hidden");
-  //     betInfo.classList.remove("animate-win");
-  //     void betInfo.offsetWidth;
-  //     betInfo.classList.add("animate-win");
-  //   }
-  // }
   private updateWinAmountDisplay() {
     const win = (this.betAmount * this.totalMultiplier).toFixed(2);
     const multiplier = this.totalMultiplier.toFixed(2);

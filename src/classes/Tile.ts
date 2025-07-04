@@ -24,26 +24,6 @@ export class Tile {
       this.onClick(this);
     }
   }
-
-  // reveal() {
-  //   this.revealed = true;
-  //   this.element.classList.add("revealed");
-
-  //   this.element.innerHTML = this.hasMine ? bombIcon : diamondIcon;
-
-  //   this.element.querySelector("svg")?.classList.add("icon");
-
-  //   if (this.hasMine) {
-  //     this.element.classList.add("mine");
-  //   } else {
-  //     this.element.classList.add("diamond");
-  //   }
-  //   const svg = this.element.querySelector("svg");
-  //   if (svg) {
-  //     svg.classList.add("icon");
-  //     svg.style.fill = this.hasMine ? " #000" : "#fff";
-  //   }
-  // }
   reveal() {
     this.revealed = true;
     this.element.classList.add("revealed");
