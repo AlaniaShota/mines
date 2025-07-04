@@ -1,5 +1,5 @@
-import { Grid } from "./grid";
-import { Tile } from "./tile";
+import { Grid } from "./Grid";
+import { Tile } from "./Tile";
 import { getNextCoefficient, getBetAmount } from "../main";
 
 import {
@@ -17,11 +17,12 @@ export class Game {
   private startButton: HTMLButtonElement;
   private totalMultiplier = 1;
 
-  constructor(
-    private rows: number,
-    private cols: number,
-    initialMines: number
-  ) {
+  private rows: number;
+  private cols: number;
+
+  constructor(rows: number, cols: number, initialMines: number) {
+    this.rows = rows;
+    this.cols = cols;
     this.mineCount = initialMines;
 
     this.grid = new Grid(
@@ -190,7 +191,6 @@ export class Game {
     const winSpan = document.getElementById("win-inside-button")!;
     winSpan.textContent = `${win}$ (x${multiplier})`;
 
-    // Анимация
     winSpan.classList.remove("animate-win");
     void winSpan.offsetWidth;
     winSpan.classList.add("animate-win");

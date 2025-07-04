@@ -1,17 +1,28 @@
-import { Tile } from "./tile";
+import { Tile } from "./Tile";
 
 export class Grid {
   private tiles: Tile[][] = [];
 
+  private rows: number;
+  private cols: number;
+  private mineCount: number;
+  private containerId: string;
+  private onTileClick: (tile: Tile) => void;
+
   constructor(
-    private rows: number,
-    private cols: number,
-    private mineCount: number,
-    private containerId: string,
-    private onTileClick: (tile: Tile) => void
+    rows: number,
+    cols: number,
+    mineCount: number,
+    containerId: string,
+    onTileClick: (tile: Tile) => void
   ) {
+    this.rows = rows;
+    this.cols = cols;
+    this.mineCount = mineCount;
+    this.containerId = containerId;
+    this.onTileClick = onTileClick;
+
     this.generateGrid();
-    // this.placeMines();
   }
 
   private generateGrid() {
@@ -56,7 +67,7 @@ export class Grid {
         tile.reset();
       }
     }
-    this.placeMines(); // ✅ теперь ставим мины тут
+    this.placeMines();
   }
 
   revealAllTiles() {

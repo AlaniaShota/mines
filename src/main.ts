@@ -1,4 +1,4 @@
-import { Game } from "./classes/game";
+import { Game } from "./classes/Game";
 import "./style.css";
 
 export const coefficients: Record<number, number> = {
@@ -89,13 +89,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const usdBtn = document.getElementById("usd");
   const customDropdown = document.getElementById("custom-dropdown");
 
-  // Показать / скрыть dropdown
   usdBtn?.addEventListener("click", (e) => {
     e.stopPropagation(); // чтобы не закрывало само себя
     customDropdown?.classList.toggle("show");
   });
 
-  // Обработка выбора суммы
   customDropdown?.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     if (target.classList.contains("dropdown-option")) {
@@ -105,8 +103,6 @@ window.addEventListener("DOMContentLoaded", () => {
       customDropdown.classList.remove("show");
     }
   });
-
-  // Закрытие при клике вне меню
   document.addEventListener("click", (e) => {
     const isClickInside =
       customDropdown?.contains(e.target as Node) ||
@@ -171,26 +167,22 @@ const minusBtn = document.getElementById("minus");
 const usdBtn = document.getElementById("usd");
 const dropdown = document.getElementById("bet-dropdown") as HTMLSelectElement;
 
-// Обработчик +
 plusBtn?.addEventListener("click", () => {
   if (!gameStarted) {
     increaseBet();
   }
 });
 
-// Обработчик -
 minusBtn?.addEventListener("click", () => {
   if (!gameStarted) {
     decreaseBet();
   }
 });
 
-// Обработчик раскрытия выпадающего меню
 usdBtn?.addEventListener("click", () => {
   dropdown.classList.toggle("hidden");
 });
 
-// Обработчик выбора суммы
 dropdown?.addEventListener("change", (e) => {
   if (!gameStarted) {
     betAmount = parseFloat((e.target as HTMLSelectElement).value);

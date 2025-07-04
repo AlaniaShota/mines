@@ -6,11 +6,14 @@ export class Tile {
   public revealed: boolean = false;
   private element: HTMLDivElement;
 
-  constructor(
-    public row: number,
-    public col: number,
-    private onClick: (tile: Tile) => void
-  ) {
+  public row: number;
+  public col: number;
+  private onClick: (tile: Tile) => void;
+
+  constructor(row: number, col: number, onClick: (tile: Tile) => void) {
+    this.row = row;
+    this.col = col;
+    this.onClick = onClick;
     this.element = document.createElement("div");
     this.element.classList.add("tile");
     this.element.addEventListener("click", () => this.handleClick());
