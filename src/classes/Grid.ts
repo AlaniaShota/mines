@@ -11,7 +11,7 @@ export class Grid {
     private onTileClick: (tile: Tile) => void
   ) {
     this.generateGrid();
-    this.placeMines();
+    // this.placeMines();
   }
 
   private generateGrid() {
@@ -33,6 +33,10 @@ export class Grid {
     }
   }
 
+  public setMineCount(count: number) {
+    this.mineCount = count;
+  }
+
   private placeMines() {
     let placed = 0;
     while (placed < this.mineCount) {
@@ -52,7 +56,7 @@ export class Grid {
         tile.reset();
       }
     }
-    this.placeMines();
+    this.placeMines(); // ✅ теперь ставим мины тут
   }
 
   revealAllTiles() {

@@ -13,30 +13,41 @@
       <div class="game-contant">
         <div class="game-header">
           <div class="game-bet-coefficient">
-            <p class="mines-quantity">Mines: 3</p>
+            <label for="mines-select">Mines:</label>
+            <select id="mines-select" class="mines-quantity"></select>
           </div>
           <div class="game-current-coefficient">
-            <p class="coefficient">Next: 1.10x</p>
+            <p class="coefficient">Next: 1.01x</p>
           </div>
         </div>
         <div class="game-container">
           <div class="game-grid" id="game-grid"></div>
           <div class="controls">
             <div class="bet-usd">
-              <p class="bet-info">Bet USD</p>
+              <p class="usd">Bet USD</p>
               <p class="bet-price">0.30</p>
             </div>
-            <div class="bet-control">
+            <div class="bet-controler">
               <div class="minus">-</div>
               <div class="full-bet-control">=</div>
               <div class="plus">+</div>
             </div>
-            <button id="start-button">Bet</button>
+            <div class="start-button-wrapper">
+              <button id="start-button">
+                <span class="button-label">Bet</span>
+                <span id="win-inside-button" class="win-text hidden"
+                  >0.00$</span
+                >
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div class="container">
         <img class="rotate" src="/public/mines-bomb.svg" alt="Bomb Icon" />
+      </div>
+      <div id="popup" class="hidden popup-content popup">
+        <p id="popup-message"></p>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
